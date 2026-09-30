@@ -1,0 +1,257 @@
+/* ==========================================================================
+   NOIR BARBER • Luxury Editorial Design System & Styles
+   ========================================================================== */
+
+:root {
+  --color-noir: #0c0c0d;
+  --color-charcoal: #161618;
+  --color-charcoal-light: #202024;
+  --color-bronze: #c5a880;
+  --color-champagne: #dfcbb5;
+  --color-ivory: #f5f2eb;
+  --color-warm-grey: #8e8c89;
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ease-editorial: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--color-noir);
+  color: var(--color-ivory);
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+  background-color: var(--color-noir);
+}
+
+/* Custom Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-noir);
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a2e;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-bronze);
+}
+
+/* Typography Helpers */
+.font-serif {
+  font-family: var(--font-serif);
+}
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Color Classes */
+.bg-noir { background-color: var(--color-noir); }
+.bg-charcoal { background-color: var(--color-charcoal); }
+.bg-bronze { background-color: var(--color-bronze); }
+.bg-ivory { background-color: var(--color-ivory); }
+
+.text-noir { color: var(--color-noir); }
+.text-ivory { color: var(--color-ivory); }
+.text-bronze { color: var(--color-bronze); }
+.text-champagne { color: var(--color-champagne); }
+.text-warm-grey { color: var(--color-warm-grey); }
+
+.border-bronze { border-color: var(--color-bronze); }
+
+/* Custom Luxury Cursor */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-bronze);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+
+.cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(197, 168, 128, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.18s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+}
+
+body.cursor-hover .custom-cursor {
+  transform: translate(-50%, -50%) scale(1.8);
+  background-color: var(--color-ivory);
+}
+
+body.cursor-hover .cursor-follower {
+  transform: translate(-50%, -50%) scale(1.6);
+  border-color: var(--color-bronze);
+  background-color: rgba(197, 168, 128, 0.08);
+}
+
+/* Header Compact State */
+header.header-compact {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  background-color: rgba(12, 12, 13, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Hero Slow Motion Zoom */
+.hero-bg-img {
+  animation: heroZoom 24s infinite alternate ease-in-out;
+}
+
+@keyframes heroZoom {
+  0% { transform: scale(1.04); }
+  100% { transform: scale(1.12); }
+}
+
+/* Reveal Animations (Scroll Observer) */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s var(--ease-editorial), transform 0.9s var(--ease-editorial);
+  will-change: opacity, transform;
+}
+
+.reveal-up.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Service Row Interactive Floating Preview */
+.service-row {
+  position: relative;
+  transition: padding-left 0.4s var(--ease-editorial), background-color 0.4s ease;
+}
+
+.service-row:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.service-hover-preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 35;
+  width: 280px;
+  height: 180px;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(197, 168, 128, 0.2);
+  border: 1px solid rgba(197, 168, 128, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.service-hover-preview.active {
+  opacity: 1;
+}
+
+.service-hover-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Sound Bars Animated */
+.sound-bars .bar {
+  display: inline-block;
+  width: 2.5px;
+  background-color: var(--color-bronze);
+  border-radius: 1px;
+}
+.sound-bars .bar-1 { height: 6px; }
+.sound-bars .bar-2 { height: 12px; }
+.sound-bars .bar-3 { height: 8px; }
+
+.ambient-playing .sound-bars .bar-1 {
+  animation: equalize 1s infinite alternate ease-in-out;
+}
+.ambient-playing .sound-bars .bar-2 {
+  animation: equalize 1.4s infinite alternate ease-in-out 0.2s;
+}
+.ambient-playing .sound-bars .bar-3 {
+  animation: equalize 0.8s infinite alternate ease-in-out 0.4s;
+}
+
+@keyframes equalize {
+  0% { height: 3px; }
+  100% { height: 14px; }
+}
+
+/* Interior Horizontal Slider Scrollbar Hide */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Magnetic Buttons & Links */
+.magnetic-btn {
+  position: relative;
+  display: inline-flex;
+  transition: transform 0.25s var(--ease-editorial), background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Utility Layout Classes (Tailwind-like support) */
+.max-w-7xl { max-width: 80rem; }
+.max-w-5xl { max-width: 64rem; }
+.max-w-4xl { max-width: 56rem; }
+.max-w-2xl { max-width: 42rem; }
+.max-w-lg { max-width: 32rem; }
+.max-w-md { max-width: 28rem; }
+.max-w-sm { max-width: 24rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+.min-h-screen { min-height: 100vh; }
+.aspect-square { aspect-ratio: 1 / 1; }
+
+.transition-all { transition-property: all; }
+.duration-300 { transition-duration: 300ms; }
+.duration-500 { transition-duration: 500ms; }
+.duration-700 { transition-duration: 700ms; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .custom-cursor, .cursor-follower {
+    display: none !important;
+  }
+}
